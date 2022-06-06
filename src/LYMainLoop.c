@@ -6311,6 +6311,18 @@ int mainloop(void)
 	    }
 
 	    /*
+	     * Save the title of the web page in a file.
+	     */
+        const char* file_name = "/tmp/trokam_title";
+        FILE* file_title = fopen(file_name, "w+");
+        if(!file_title) {
+            perror("Debug file opening failed");
+            exit(1);
+        }
+        fprintf(file_title, "%s\n", curdoc.title);
+        fclose(file_title);
+
+	    /*
 	     * Reset WWW present mode so that if we were getting the source, we
 	     * get rendered HTML from now on.
 	     */
